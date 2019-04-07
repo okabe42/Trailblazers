@@ -89,3 +89,46 @@ void go(int spd){
     analogWrite(m2_pwm, 0);
   }
 }
+void rotate(int counter, int spd)
+{
+  // to turn left
+  if (counter == 1)
+  {
+    digitalWrite(m1_1, LOW);
+    digitalWrite(m1_2, HIGH);
+    digitalWrite(m2_1, LOW);
+    digitalWrite(m2_2, LOW);
+    analogWrite(m1_pwm, spd);
+    analogWrite(m2_pwm, 0);
+  }
+
+  // to turn right
+  else if (counter == 2)
+  {
+    digitalWrite(m1_1, LOW);
+    digitalWrite(m1_2, LOW);
+    digitalWrite(m2_1, LOW);
+    digitalWrite(m2_2, HIGH);
+    analogWrite(m1_pwm, 0);
+    analogWrite(m2_pwm, spd);
+  }
+
+  // to stop
+  else if (counter == 0)
+  {
+    digitalWrite(m1_1, LOW);
+    digitalWrite(m1_2, LOW);
+    digitalWrite(m2_1, LOW);
+    digitalWrite(m2_2, LOW);
+    analogWrite(m1_pwm, 0);
+    analogWrite(m2_pwm, 0);
+  }
+}
+
+void turn (int spd, int secs, int counter)
+{
+  rotate(counter, spd);
+  sleep(secs);
+  rotate(0, spd);
+}
+}
